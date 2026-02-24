@@ -14,9 +14,9 @@ while True:
             new_todo = input('Enter new todo: ')
             Todos[number] = new_todo
         case 'show' | 'display':  # bitwise op. can use either show or display
-            for item in Todos:
+            for index, item in enumerate(Todos):
                 item = item.title()  # capitalizes the first letter
-                print(item)
+                print(index, '.', item)
         case 'exit':
             break
         case tf:
