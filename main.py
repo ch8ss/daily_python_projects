@@ -15,8 +15,8 @@ while True:
             Todos[number] = new_todo
         case 'show' | 'display':  # bitwise op. can use either show or display
             for index, item in enumerate(Todos):
-                item = item.title()  # capitalizes the first letter
-                print(index, '.', item)
+                row = f"{index}.{item}"
+                print(row)
         case 'exit':
             break
         case tf:
