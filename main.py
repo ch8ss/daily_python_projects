@@ -1,13 +1,20 @@
-Todos = []
-
 while True:
     user_action = input("Type add, edit, show, complete or exit: ")
     user_action = user_action.strip()  # ignores spaces
 
     match user_action:
         case 'add':
-            Todo = input("Add a new task: ")
+            Todo = input("Add a new task: ") + "\n"
+            file = open('todo.text','r')
+            Todos = file.readlines()
+            file.close()
+
             Todos.append(Todo)
+
+            file = open('todo.txt','w')
+            file.writelines(Todos)
+            file.close()
+
         case 'edit':
             number = int(input('number of the task to be edited: '))
             number = number - 1  # ensures that the numbering starts from 1, not 0
