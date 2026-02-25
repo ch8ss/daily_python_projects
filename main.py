@@ -15,8 +15,12 @@ while True:
             Todos[number] = new_todo
         case 'show' | 'display':  # bitwise op. can use either show or display
             for index, item in enumerate(Todos):
-                row = f"{index}.{item}"
+                row = f"{index+1}.{item}"
                 print(row)
+        case 'complete':
+            num = int(input('number of the completed task: '))
+            Todos.pop(num-1)
+
         case 'exit':
             break
         case tf:
