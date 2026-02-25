@@ -1,7 +1,7 @@
 Todos = []
 
 while True:
-    user_action = input("Type add, edit, show or exit: ")
+    user_action = input("Type add, edit, show, complete or exit: ")
     user_action = user_action.strip()  # ignores spaces
 
     match user_action:
@@ -14,6 +14,7 @@ while True:
             new_todo = input('Enter new todo: ')
             Todos[number] = new_todo
         case 'show' | 'display':  # bitwise op. can use either show or display
+            print("Total number of tasks:", len(Todos))
             for index, item in enumerate(Todos):
                 row = f"{index+1}.{item}"
                 print(row)
