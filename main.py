@@ -5,7 +5,7 @@ while True:
     match user_action:
         case 'add':
             Todo = input("Add a new task: ") + "\n"
-            file = open('todo.text','r')
+            file = open('todo.txt','r')
             Todos = file.readlines()
             file.close()
 
