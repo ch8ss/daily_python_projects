@@ -5,7 +5,7 @@ while True:
     match user_action:
         case 'add':
             Todo = input("Add a new task: ") + "\n"
-            file = open('todo.text','r')
+            file = open('todo.txt','r')
             Todos = file.readlines()
             file.close()
 
@@ -21,8 +21,14 @@ while True:
             new_todo = input('Enter new todo: ')
             Todos[number] = new_todo
         case 'show' | 'display':  # bitwise op. can use either show or display
+            file = open('todo.txt','r')
+            Todos = file.readlines()
+            file.close()
+
+            new_todos = [item.strip('\n')for item in Todos]
+
             print("Total number of tasks:", len(Todos))
-            for index, item in enumerate(Todos):
+            for index, item in enumerate(new_todos):
                 row = f"{index+1}.{item}"
                 print(row)
         case 'complete':
