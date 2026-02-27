@@ -4,28 +4,26 @@ while True:
 
     match user_action:
         case 'add':
-            Todo = input("Add a new task: ") + "\n"
-            file = open('todo.txt','r')
-            Todos = file.readlines()
-            file.close()
+            with open('todo.txt','r') as file:
+                file.readlines(Todos)
 
-            Todos.append(Todo)
+            Todos.append(Todos)
 
-            file = open('todo.txt','w')
-            file.writelines(Todos)
-            file.close()
+            with open('todo.txt','w') as file:
+                file.writelines(Todos)
 
         case 'edit':
             number = int(input('number of the task to be edited: '))
             number = number - 1  # ensures that the numbering starts from 1, not 0
             new_todo = input('Enter new todo: ')
             Todos[number] = new_todo
+
         case 'show' | 'display':  # bitwise op. can use either show or display
             file = open('todo.txt','r')
             Todos = file.readlines()
             file.close()
 
-            new_todos = [item.strip('\n')for item in Todos]
+            new_todos = [item.strip('\n')for item in Todos] #List Comprehension
 
             print("Total number of tasks:", len(Todos))
             for index, item in enumerate(new_todos):
