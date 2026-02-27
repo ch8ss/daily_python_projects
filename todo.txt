@@ -1,5 +1,8 @@
 jogging
 laundry
 study
+<<<<<<< HEAD
 python
 DBMS observation
+=======
+>>>>>>> origin/main
