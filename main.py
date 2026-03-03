@@ -23,7 +23,7 @@ while True:
                 print('here are the existing todos: ', Todos)
 
             new_todo = input('Enter new todo: ')
-            Todos[number] = new_todo
+            Todos[number] = new_todo + '\n'
             print('edited list of todos: ', Todos)
 
         case 'show' | 'display':  # bitwise op. can use either show or display
