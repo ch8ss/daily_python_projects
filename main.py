@@ -43,7 +43,14 @@ while True:
                 print(row)
         case 'complete':
             num = int(input('number of the completed task: '))
+
+            with open('todo.txt','r') as file:
+                file.readlines()
+
             Todos.pop(num-1)
+
+            with open('todo.txt','w') as file:
+                todos = file.writelines(Todos)
 
         case 'exit':
             break
