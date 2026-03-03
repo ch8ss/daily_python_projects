@@ -20,11 +20,12 @@ while True:
 
             with open('todo.txt','r') as file:
                 todos = file.readlines()
-                print('here are the existing todos: ', Todos)
 
             new_todo = input('Enter new todo: ')
             Todos[number] = new_todo + '\n'
-            print('edited list of todos: ', Todos)
+
+            with open('todo.txt','w') as file:
+                file.writelines(Todos)
 
         case 'show' | 'display':  # bitwise op. can use either show or display
             file = open('todo.txt','r')
