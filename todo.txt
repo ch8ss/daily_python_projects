@@ -6,3 +6,4 @@ python
 DBMS observation
 =======
 >>>>>>> origin/main
+play chess

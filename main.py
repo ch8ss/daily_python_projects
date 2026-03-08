@@ -1,55 +1,54 @@
 while True:
     user_action = input("Type add, edit, show, complete or exit: ")
-    user_action = user_action.strip()  # ignores spaces
+    user_action = user_action.strip()
 
-    match user_action:
-        case 'add':
-            todo = input('Enter a todo: ') + '\n'
+    if 'add' in user_action:
+        todo = user_action[4:]
 
-            with open('todo.txt','r') as file:
-                todos = file.readlines()
+        with open('todo.txt','r') as file:
+            todos = file.readlines()
 
-            Todos.append(todo)
+        todos.append(todo + '\n')
 
-            with open('todo.txt','w') as file:
-                file.writelines(Todos)
+        with open('todo.txt','w') as file:
+            file.writelines(todos)
 
-        case 'edit':
-            number = int(input('number of the task to be edited: '))
-            number = number - 1  # ensures that the numbering starts from 1, not 0
+    if 'edit' in user_action:
+        number = int(input('number of the task to be edited: '))
+        number = number - 1
 
-            with open('todo.txt','r') as file:
-                todos = file.readlines()
+        with open('todo.txt','r') as file:
+            todos = file.readlines()
 
-            new_todo = input('Enter new todo: ')
-            Todos[number] = new_todo + '\n'
+        new_todo = input('Enter new todo: ')
+        todos[number] = new_todo + '\n'
 
-            with open('todo.txt','w') as file:
-                file.writelines(Todos)
+        with open('todo.txt','w') as file:
+            file.writelines(todos)
 
-        case 'show' | 'display':  # bitwise op. can use either show or display
-            file = open('todo.txt','r')
-            Todos = file.readlines()
-            file.close()
+    if 'show' in user_action or 'display' in user_action:
+        with open('todo.txt','r') as file:
+            todos = file.readlines()
 
-            with open('todo.txt','r') as file:
-                todos = file.readlines()
+        new_todos = [item.strip('\n') for item in todos]
 
-            new_todos = [item.strip('\n')for item in Todos] #List Comprehension
+        print("Total number of tasks:", len(todos))
+        for index, item in enumerate(new_todos):
+            row = f"{index+1}. {item}"
+            print(row)
 
-            print("Total number of tasks:", len(Todos))
-            for index, item in enumerate(new_todos):
-                row = f"{index+1}.{item}"
-                print(row)
-        case 'complete':
-            num = int(input('number of the completed task: '))
-            Todos.pop(num-1)
+    if 'complete' in user_action:
+        num = int(input('number of the completed task: '))
 
-        case 'exit':
-            break
-        case tf:
-            print("Invalid")
+        with open('todo.txt','r') as file:
+            todos = file.readlines()
+
+        todos.pop(num-1)
+
+        with open('todo.txt','w') as file:
+            file.writelines(todos)
+
+    if 'exit' in user_action:
+        break
 
 print("Bye see ya!")
-
-
