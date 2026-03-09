@@ -1,4 +1,4 @@
-jogging
+add a new player
 laundry
 study
 <<<<<<< HEAD
