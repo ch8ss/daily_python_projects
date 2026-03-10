@@ -24,8 +24,7 @@ def get_todos():
 
             number = number - 1
 
-            with open('todo.txt','r') as file:
-                todos = file.readlines()
+            todos = get_todos()
 
             new_todo = input('Enter new todo: ')
             todos[number] = new_todo + '\n'
@@ -54,9 +53,7 @@ def get_todos():
 
             number = int(user_action[9:])
 
-            with open('todo.txt', 'r') as file:
-
-                todos = file.readlines()
+            todos = get_todos()
 
             todo_to_remove = todos.pop(number - 1).strip('\n')
 
