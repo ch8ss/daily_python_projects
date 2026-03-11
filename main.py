@@ -1,71 +1,85 @@
-def get_todos():
-    with open('todos.txt', 'r') as file:
-        todos = file.readlines()
-    return todos
+FILEPATH = "todos.txt"
+
+
+def get_todos(filepath=FILEPATH):
+    try:
+        with open(filepath, "r") as file:
+            return file.readlines()
+    except FileNotFoundError:
+        return []
+
+
+def write_todos(todos, filepath=FILEPATH):
+    with open(filepath, "w") as file:
+        file.writelines(todos)
+
+
+def show_todos():
+    todos = get_todos()
+    print(f"\nTotal number of tasks: {len(todos)}")
+    for index, todo in enumerate(todos, start=1):
+        print(f"{index}. {todo.strip()}")
+    print()
 
 
 while True:
-    user_action = input("Type add, edit, show, complete or exit: ")
-    user_action = user_action.strip()
+    user_action = input("Type add, edit, show, complete or exit: ").strip()
 
-    if user_action.startswith('add'):
-        todo = user_action[4:]
-        todos = get_todos()
-        todos.append(todo + '\n')
-
-        with open('todos.txt', 'w') as file:
-            file.writelines(todos)
-
-    elif user_action.startswith('edit'):
-        try:
-            number = int(user_action[5:])
-            number = number - 1
-
-            todos = get_todos()
-            new_todo = input('Enter new todo: ')
-            todos[number] = new_todo + '\n'
-
-            with open('todos.txt', 'w') as file:
-                file.writelines(todos)
-        except ValueError:
-            print('Invalid Command')
-            continue
-        except IndexError:
-            print("No such todo item.")
+    if user_action.startswith("add"):
+        todo = user_action[4:].strip()
+        if todo == "":
+            print("Cannot add an empty todo.")
             continue
 
-    elif user_action.startswith('show'):
         todos = get_todos()
-        new_todos = [item.strip('\n') for item in todos]
+        todos.append(todo + "\n")
+        write_todos(todos)
+        print(f"Added: {todo}")
 
-        print("Total number of tasks:", len(todos))
-        for index, item in enumerate(new_todos):
-            row = f"{index + 1}. {item}"
-            print(row)
-
-    elif user_action.startswith('complete'):
+    elif user_action.startswith("edit"):
         try:
-            number = int(user_action[9:])
+            number = int(user_action[5:].strip()) - 1
             todos = get_todos()
-            todo_to_remove = todos.pop(number - 1).strip('\n')
 
-            with open('todos.txt', 'w') as file:
-                file.writelines(todos)
+            if number < 0 or number >= len(todos):
+                print("No such todo item.")
+                continue
 
-            message = f"Todo '{todo_to_remove}' was removed from the list."
-            print(message)
+            new_todo = input("Enter new todo: ").strip()
+            if new_todo == "":
+                print("Todo cannot be empty.")
+                continue
+
+            todos[number] = new_todo + "\n"
+            write_todos(todos)
+            print("Todo updated.")
 
         except ValueError:
-            print("Invalid Command")
-            continue
-        except IndexError:
-            print("No such todo item.")
-            continue
+            print("Invalid command. Use: edit <number>")
 
-    elif user_action.startswith('exit'):
+    elif user_action == "show":
+        show_todos()
+
+    elif user_action.startswith("complete"):
+        try:
+            number = int(user_action[9:].strip()) - 1
+            todos = get_todos()
+
+            if number < 0 or number >= len(todos):
+                print("No such todo item.")
+                continue
+
+            removed = todos.pop(number).strip()
+            write_todos(todos)
+            print(f"Todo '{removed}' was removed from the list.")
+
+        except ValueError:
+            print("Invalid command. Use: complete <number>")
+
+    elif user_action == "exit":
         break
 
     else:
-        print('Invalid Command')
+        print("Invalid command.")
 
 print("Bye see ya!")
