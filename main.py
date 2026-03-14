@@ -1,7 +1,7 @@
 FILEPATH = "todos.txt"
 
 
-def get_todos(filepath=FILEPATH):
+def get_todos(filepath="todos.txt"):
     try:
         with open(filepath, "r") as file:
             return file.readlines()
