@@ -19,9 +19,11 @@ while True:
     match event:
         case "Add":
             todos = functions.get_todos()
-            new_todo = values['todo']
+            new_todo = values['todo'] + "\n"
             todos.append(new_todo)
             functions.write_todos(todos)
+        case sg.WINDOW_CLOSED:
+            break
 
 
 window.close()
