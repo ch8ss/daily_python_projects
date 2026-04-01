@@ -18,19 +18,19 @@ def main():
             add_todo(parts[1].strip())
 
         elif command == "edit":
-            try:
-                edit_todo(int(parts[1]))
-            except:
-                print("Invalid command. Use: edit <number>")
+            if len(parts) < 2 or not parts[1].isdigit():
+                print("Usage: edit <number>")
+                continue
+            edit_todo(int(parts[1]))
 
         elif command == "show":
             show_todos()
 
         elif command == "complete":
-            try:
-                complete_todo(int(parts[1]))
-            except:
-                print("Invalid command. Use: complete <number>")
+            if len(parts) < 2 or not parts[1].isdigit():
+                print("Usage: complete <number>")
+                continue
+            complete_todo(int(parts[1]))
 
         elif command == "exit":
             print("Bye see ya!")
