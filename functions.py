@@ -33,19 +33,20 @@ def add_todo(todo_text):
     write_todos(todos)
     print(f"Added: {todo_text}")
 
-def edit_todo(number):
+def edit_todo(number, new_text=None):
     todos = get_todos()
 
     if number < 1 or number > len(todos):
         print("No such todo item.")
         return
 
-    new_todo = input("Enter new todo: ").strip()
-    if not new_todo:
+    if new_text is None:
+        new_text = input("Enter new todo: ").strip()
+    if not new_text:
         print("Todo cannot be empty.")
         return
 
-    todos[number - 1] = new_todo + "\n"
+    todos[number - 1] = new_text + "\n"
     write_todos(todos)
     print("Todo updated.")
 
