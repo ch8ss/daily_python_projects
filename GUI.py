@@ -9,6 +9,7 @@ list_box = sg.Listbox(values=functions.get_todos(), key='todos',
                       enable_events = True, size = [45, 10])
 edit_button = sg.Button("Edit")
 complete_button = sg.Button("Complete")
+exit_buttom = sg.Button("Exit")
 
 window = sg.Window(
     "My To-Do App",
@@ -45,6 +46,7 @@ while True:
             functions.write_todos(todos)
             window['todos'].update(values=todos)
             window['todo'].update(value="")
+        case "Exit":
 
         case sg.WINDOW_CLOSED:
             break
