@@ -31,15 +31,19 @@ while True:
             todos.append(new_todo)
             functions.write_todos(todos)
         case "Edit":
-            todo_to_edit = values['todos'][0]
-            new_todo = values['todo'] + "\n"
+            try:
 
-            todos = functions.get_todos()
-            index = todos.index(todo_to_edit)
-            todos[index] = new_todo
+                todo_to_edit = values['todos'][0]
+                new_todo = values['todo'] + "\n"
 
-            functions.write_todos(todos)
-            window['todos'].update(values=todos)
+                todos = functions.get_todos()
+                index = todos.index(todo_to_edit)
+                todos[index] = new_todo
+
+                functions.write_todos(todos)
+                window['todos'].update(values=todos)
+            except IndexError:
+                sg.popup("Please select an item first.", font=("Helvetica",20))
         case "Complete":
             todo_to_complete = values['todos'][0]
             todos = functions.get_todos()
