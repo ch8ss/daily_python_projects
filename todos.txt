@@ -1,2 +1,3 @@
-Finish Observation notes
 Master Python!
+Run a marathon
+Python observation book
